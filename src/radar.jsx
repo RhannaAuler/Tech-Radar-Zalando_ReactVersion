@@ -401,6 +401,7 @@ function radar_visualization(svg, svgRef, config) {
 
     function unhighlightLegendItem(d) {
       var legendItem = document.getElementById("legendItem" + d.id);
+      console.log(legendItem)
       if (legendItem){
         legendItem.removeAttribute("filter");
         legendItem.removeAttribute("fill");
@@ -420,7 +421,7 @@ function radar_visualization(svg, svgRef, config) {
       }) 
       // these functionalities were modified to correctly get the blip data instead of the mouse event
       .on("mouseover", function () { const d = this.__data__; console.log(d); showBubble(d); highlightLegendItem(d); }) 
-      .on("mouseout", function () { const d = this.__data__; showBubble(d); highlightLegendItem(d); });
+      .on("mouseout", function () { const d = this.__data__; showBubble(d); unhighlightLegendItem(d); });
 
     // configure each blip
     blips.each(function (d) {
