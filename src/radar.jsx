@@ -401,7 +401,6 @@ function radar_visualization(svg, svgRef, config) {
 
     function unhighlightLegendItem(d) {
       var legendItem = document.getElementById("legendItem" + d.id);
-      console.log(legendItem)
       if (legendItem){
         legendItem.removeAttribute("filter");
         legendItem.removeAttribute("fill");
