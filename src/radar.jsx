@@ -20,7 +20,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-import React, { useState, useRef, useEffect } from 'react';
 import * as d3 from 'd3';
 
 function radar_visualization(svg, svgRef, config) {
@@ -221,6 +220,10 @@ function radar_visualization(svg, svgRef, config) {
       .style("stroke", config.colors.grid)
       .style("stroke-width", 1);
 
+    // check if the user system is in dark mode
+    const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const feFloodColor = prefersDarkMode ? "rgb(255, 255, 255, 0.5)" : "rgb(0, 0, 0, 0.3)";
+
     // background color. Usage `.attr("filter", "url(#solid)")`
     // SOURCE: https://stackoverflow.com/a/31013492/2609980
     var defs = grid.append("defs");
@@ -231,7 +234,7 @@ function radar_visualization(svg, svgRef, config) {
       .attr("height", 1)
       .attr("id", "solid");
     filter.append("feFlood")
-      .attr("flood-color", "rgb(0, 0, 0, 0.8)");
+      .attr("flood-color", feFloodColor);
     filter.append("feComposite")
       .attr("in", "SourceGraphic");
 
@@ -358,14 +361,14 @@ function radar_visualization(svg, svgRef, config) {
     bubble.append("rect")
       .attr("rx", 4)
       .attr("ry", 4)
-      .style("fill", "#333");
+      .style("fill", "#A9A9A9");
     bubble.append("text")
       .style("font-family", "sans-serif")
       .style("font-size", "10px")
       .style("fill", "#fff");
     bubble.append("path")
       .attr("d", "M 0,0 10,0 5,8 z")
-      .style("fill", "#333");
+      .style("fill", "#A9A9A9");
 
     function showBubble(d) {
       if (d.active || config.print_layout) {

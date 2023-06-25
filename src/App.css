@@ -1,30 +1,51 @@
-svg {
-  /* background: #aa2b95; */
-}
-
 .App {
   text-align: center;
+  font-family: 'Source Sans Pro', arial, helvetica, sans-serif;
+  /* background: #fdfdfd; */
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-
+/* Style when system in dark mode */
+@media (prefers-color-scheme: dark) {
+  .App {
+    background-color: #121212;
+    color: #fffffff7;
+  }
+  #radar {
+    background-color: #121212;
+    color: #fffffff7;
+  }
+  text {
+    fill: #fffffff7;
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+/* Style when system in light mode */
+@media (prefers-color-scheme: light) {
+  .App {
+    background-color: #ffffff;
+    color: #000000;
+  }
+  #radar {
+    background-color: #ffffff;
+    color: #000000;
+  }
+  text {
+    fill: #000000;
+  }
 }
 
-.App-link {
-  color: #61dafb;
+h3 {
+  margin-top: 50px;
 }
-
-
+li {
+  margin: 25px 50px 0 0;
+}
+table {
+  width: 90%;
+  margin: 0 50px 0 50px;
+}
+td {
+  width: 50%;
+  vertical-align: top;
+  padding-right: 60px;
+}
