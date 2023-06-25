@@ -579,6 +579,13 @@
       "link": "https://engineering.zalando.com/tags/rabbitmq.html",
       "active": true,
       "moved": 0
+    },
+    {
+      "quadrant": 0,
+      "ring": 0,
+      "label": "Ruby",
+      "active": true,
+      "moved": 0
     }
   ]
 }
