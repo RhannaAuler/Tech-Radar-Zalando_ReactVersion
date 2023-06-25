@@ -20,33 +20,37 @@ function App() {
 
   // makes a request to the server to add a new technology
   const handleClick = () => {
-  fetch('http://localhost:3001/update-json', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    // body: JSON.stringify(config),
-  })
-  .then((response) => {
-    if (response.ok) {
-      return response.json(); // parse the response as JSON
-    } else {
-      throw new Error('Failed to update JSON file.');
-    }
-  })
-  .then((data) => { // to get the modified file sent from the server
-    // setConfig(data);  // update the config to add the new tech
-    console.log('JSON file updated successfully.', data);
-  })
-  .catch((error) => {
-    console.error(error);
-  });
-};
+    fetch('http://localhost:3001/update-json', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      // body: JSON.stringify(config),
+    })
+      .then((response) => {
+        if (response.ok) {
+          return response.json(); // parse the response as JSON
+        } else {
+          throw new Error('Failed to update JSON file.');
+        }
+      })
+      .then((data) => { // to get the modified file sent from the server
+        setConfig(data);  // update the config to add the new tech
+        console.log('JSON file updated successfully.', data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
 
   useEffect(() => {
-    console.log
-    const svg = d3.select(svgRef.current)
-      .attr("width", config.width)
+    const svg = d3.select(svgRef.current);
+
+    // remove the old SVG if it exists
+    svg.selectAll("*").remove();
+
+    // set the attributes for the new SVG
+    svg.attr("width", config.width)
       .attr("height", config.height);
 
     // call the function to create the radar
