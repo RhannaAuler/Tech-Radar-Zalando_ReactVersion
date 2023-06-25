@@ -4,6 +4,8 @@ import radar_visualization from './radar';
 import * as d3 from 'd3';
 import config from './techData';
 import InformationTable from './infoTable';
+import { Grid, Button } from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
 
 function App() {
   const svgRef = useRef();
@@ -25,17 +27,27 @@ function App() {
 
 
   return (
-    <div className="App">
-      <title>Zalando Tech Radar</title>
-      {/* <link rel="shortcut icon" href="https://www.zalando.de/favicon.ico"> */}
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+      <Grid className="App"
+        container
+        spacing={2}
+        direction="column"
+        width={1500}
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+      >
+        <title>Zalando Tech Radar</title>
+        {/* <link rel="shortcut icon" href="https://www.zalando.de/favicon.ico"> */}
 
-      {/* <script src="https://d3js.org/d3.v4.min.js"></script>
+        {/* <script src="https://d3js.org/d3.v4.min.js"></script>
         <script src="radar.js"></script> */}
 
-      <svg id={'#radar'} ref={svgRef}></svg>
+        <svg id={'#radar'} ref={svgRef}></svg>
 
-      <InformationTable />
+        <InformationTable />
 
+      </Grid>
     </div>
   );
 }
