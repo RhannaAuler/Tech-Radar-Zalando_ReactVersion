@@ -6,41 +6,70 @@ import techData from './techData.json';
 import InformationTable from './infoTable';
 import { Grid, Button } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
+import NewTechDialog from './components/newTechDialog';
 
 function App() {
   const svgRef = useRef();
   const containerRef = useRef();
 
+  // the tech data used to create the radar blips
   const [config, setConfig] = useState(techData);
+
+  // new tech dialog and confirmation
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   // get the page dimensions and change in the config object (currently not being used)
   const pageWidth = document.documentElement.clientWidth;
   const pageHeight = document.documentElement.clientHeight;
 
-
-  // makes a request to the server to add a new technology
+  // once the new tech button is pressed a dialog is open
+  // when confirmed, a request to the server to add a new technology is sent
   const handleClick = () => {
-    fetch('http://localhost:3001/update-json', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      // body: JSON.stringify(config),
-    })
-      .then((response) => {
-        if (response.ok) {
-          return response.json(); // parse the response as JSON
-        } else {
-          throw new Error('Failed to update JSON file.');
-        }
+    setIsDialogOpen(true);
+  };
+
+  const handleDialogClose = () => {
+    setIsDialogOpen(false);
+  };
+
+  const handleDialogConfirm = (type, semantics, label) => {
+    console.log(type, semantics, label, type!=='' && semantics!=='' && label!=='')
+    if (type!=='' && semantics!=='' && label!==''){
+      let newEntry = {
+        "quadrant": type,
+        "ring": semantics,
+        "label": label,
+        "active": true,
+        "moved": 0
+      }
+      console.log(newEntry)
+
+      fetch('http://localhost:3001/update-json', { // future fuctionality is to check if the label already exists
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newEntry), // convert the object to a JSON string
       })
-      .then((data) => { // to get the modified file sent from the server
-        setConfig(data);  // update the config to add the new tech
-        console.log('JSON file updated successfully.', data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+        .then((response) => {
+          if (response.ok) {
+            return response.json(); // parse the response as JSON
+          } else {
+            throw new Error('Failed to update JSON file.');
+          }
+        })
+        .then((data) => { // to get the modified file sent from the server
+          setConfig(data);  // update the config to add the new tech
+          console.log('JSON file updated successfully.', data);
+        })
+        .catch(error => { // handles the error
+          console.error(error);
+        })
+        .finally(() => {
+          setIsDialogOpen(false); // close the dialog
+        });
+    }
+
   };
 
   useEffect(() => {
@@ -95,7 +124,7 @@ function App() {
             >
               Add Tech
             </Button>
-
+            <NewTechDialog isOpen={isDialogOpen} onClose={handleDialogClose} onConfirm={handleDialogConfirm} />
           </div>
         </div>
 
