@@ -30,20 +30,42 @@ function App() {
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
       <Grid className="App"
         container
-        spacing={2}
         direction="column"
         width={1500}
         display="flex"
         justifyContent="center"
         alignItems="center"
+        padding={0}
       >
+
         <title>Zalando Tech Radar</title>
         {/* <link rel="shortcut icon" href="https://www.zalando.de/favicon.ico"> */}
 
         {/* <script src="https://d3js.org/d3.v4.min.js"></script>
         <script src="radar.js"></script> */}
 
-        <svg id={'#radar'} ref={svgRef}></svg>
+
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '20px'}}>
+          <div style={{ position: 'relative' }}>
+            <svg id={'#radar'} ref={svgRef}></svg>
+            <Button
+              variant="contained"
+              style={{
+                position: 'absolute',
+                top: '20px',
+                right: '10px',
+                backgroundColor: '#009eb0',
+                color: '#fff',
+                fontWeight: 'bold'
+              }}
+              startIcon={<AddIcon />}
+            >
+              Add Tech
+            </Button>
+
+          </div>
+        </div>
+
 
         <InformationTable />
 

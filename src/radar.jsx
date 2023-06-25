@@ -58,7 +58,7 @@ function radar_visualization(svg, svgRef, config) {
     ];
 
     const title_offset =
-      { x: -675, y: -420 };
+      { x: -675, y: -460 };
 
     const footer_offset =
       { x: -675, y: 420 };
