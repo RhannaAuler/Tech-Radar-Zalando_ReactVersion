@@ -1,8 +1,8 @@
 import './App.css'
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import radar_visualization from './radar';
 import * as d3 from 'd3';
-import config from './techData';
+import techData from './techData.json';
 import InformationTable from './infoTable';
 import { Grid, Button } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
@@ -11,19 +11,47 @@ function App() {
   const svgRef = useRef();
   const containerRef = useRef();
 
+  const [config, setConfig] = useState(techData);
+
   // get the page dimensions and change in the config object (currently not being used)
   const pageWidth = document.documentElement.clientWidth;
   const pageHeight = document.documentElement.clientHeight;
 
-  useEffect(() => {
 
+  // makes a request to the server to add a new technology
+  const handleClick = () => {
+  fetch('http://localhost:3001/update-json', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    // body: JSON.stringify(config),
+  })
+  .then((response) => {
+    if (response.ok) {
+      return response.json(); // parse the response as JSON
+    } else {
+      throw new Error('Failed to update JSON file.');
+    }
+  })
+  .then((data) => { // to get the modified file sent from the server
+    // setConfig(data);  // update the config to add the new tech
+    console.log('JSON file updated successfully.', data);
+  })
+  .catch((error) => {
+    console.error(error);
+  });
+};
+
+  useEffect(() => {
+    console.log
     const svg = d3.select(svgRef.current)
       .attr("width", config.width)
       .attr("height", config.height);
 
     // call the function to create the radar
     radar_visualization(svg, svgRef, config);
-  }, [])
+  }, [config])
 
 
   return (
@@ -45,7 +73,7 @@ function App() {
         <script src="radar.js"></script> */}
 
 
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '20px'}}>
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '20px' }}>
           <div style={{ position: 'relative' }}>
             <svg id={'#radar'} ref={svgRef}></svg>
             <Button
@@ -59,6 +87,7 @@ function App() {
                 fontWeight: 'bold'
               }}
               startIcon={<AddIcon />}
+              onClick={handleClick}
             >
               Add Tech
             </Button>
