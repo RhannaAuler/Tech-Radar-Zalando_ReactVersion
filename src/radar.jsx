@@ -22,7 +22,7 @@
 
 import * as d3 from 'd3';
 
-function radar_visualization(svg, svgRef, config) {
+function radar_visualization(svg, svgRef, config, handleOpenModal) {
 
     const svgElement = svgRef.current;
 
@@ -422,7 +422,7 @@ function radar_visualization(svg, svgRef, config) {
         this.__data__ = blipData;
       }) 
       // these functionalities were modified to correctly get the blip data instead of the mouse event
-      .on("mouseover", function () { const d = this.__data__; console.log(d); showBubble(d); highlightLegendItem(d); }) 
+      .on("mouseover", function () { const d = this.__data__; showBubble(d); highlightLegendItem(d); }) 
       .on("mouseout", function () { const d = this.__data__; showBubble(d); unhighlightLegendItem(d); });
 
     // configure each blip
@@ -430,12 +430,16 @@ function radar_visualization(svg, svgRef, config) {
       var blip = d3.select(this);
 
       // blip link
-      if (d.active && Object.prototype.hasOwnProperty.call(d, "link") && d.link) {
+      // if (d.active && Object.prototype.hasOwnProperty.call(d, "link") && d.link) {
+      if (d.active) {
         blip = blip.append("a")
-          .attr("xlink:href", d.link)
+          // .attr("xlink:href", d.link ? d.link : " ")
+          .style("cursor", "pointer")
           .on("click", function (d, i) {
             // Handle click event to open modal
-            console.log(blip._groups[0][0].__data__);
+            let blipData = blip._groups[0][0].__data__;
+            // console.log(blipData.label, blipData.link ? blipData.link  : "");
+            handleOpenModal(blipData.label, blipData.link);
           });
 
         if (config.links_in_new_tabs) {
@@ -487,7 +491,7 @@ function radar_visualization(svg, svgRef, config) {
       .force("collision", d3.forceCollide().radius(12).strength(0.85))
       .on("tick", ticked);
 
-    return svg;
+    return svg
 
 }
 

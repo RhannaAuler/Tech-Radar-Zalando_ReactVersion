@@ -3,14 +3,18 @@ import React, { useEffect, useRef, useState } from 'react';
 import radar_visualization from './radar';
 import * as d3 from 'd3';
 import techData from './techData.json';
+import techDescription from './components/techDescriptions';
 import InformationTable from './components/infoTable';
-import { Grid, Button } from '@mui/material';
+import { Grid, Button, Modal, Box } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import NewTechDialog from './components/newTechDialog';
 
 function App() {
   const svgRef = useRef();
-  const containerRef = useRef();
+
+  // get the page dimensions and change in the config object (currently not being used)
+  const pageWidth = document.documentElement.clientWidth;
+  const pageHeight = document.documentElement.clientHeight;
 
   // the tech data used to create the radar blips
   const [config, setConfig] = useState(techData);
@@ -18,9 +22,27 @@ function App() {
   // new tech dialog and confirmation
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
-  // get the page dimensions and change in the config object (currently not being used)
-  const pageWidth = document.documentElement.clientWidth;
-  const pageHeight = document.documentElement.clientHeight;
+  // tech information modal
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [blipLabel, setBlipLabel] = useState("");
+  const [blipLink, setBlipLink] = useState("");
+  const [blipDescription, setBlipDescription] = useState("");
+
+  const handleOpenModal = (label, link) => {
+    console.log("openModal", label, link, link !== undefined, link !== null, techDescription[label]);
+    setBlipLabel(label);
+    if (link !== undefined) setBlipLink(link);
+    let textTech = techDescription[label];
+    if (textTech) setBlipDescription(textTech);
+    console.log(blipLink === "")
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setBlipLabel("");
+    setBlipLink("");
+  };
 
   // once the new tech button is pressed a dialog is open
   // when confirmed, a request to the server to add a new technology is sent
@@ -33,8 +55,8 @@ function App() {
   };
 
   const handleDialogConfirm = (type, semantics, label) => {
-    console.log(type, semantics, label, type!=='' && semantics!=='' && label!=='')
-    if (type!=='' && semantics!=='' && label!==''){
+    console.log(type, semantics, label, type !== '' && semantics !== '' && label !== '')
+    if (type !== '' && semantics !== '' && label !== '') {
       let newEntry = {
         "quadrant": type,
         "ring": semantics,
@@ -83,7 +105,8 @@ function App() {
       .attr("height", config.height);
 
     // call the function to create the radar
-    radar_visualization(svg, svgRef, config);
+    radar_visualization(svg, svgRef, config, handleOpenModal);
+    // handleOpenModal function is sent as a parameter so it is called once a blip is clicked
   }, [config])
 
 
@@ -120,13 +143,47 @@ function App() {
               Add Tech
             </Button>
             <NewTechDialog isOpen={isDialogOpen} onClose={handleDialogClose} onConfirm={handleDialogConfirm} />
+            <Modal open={isModalOpen} onClose={handleCloseModal}>
+              <Box className="boxModal" sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
+                borderRadius: 1,
+                width: 400,
+                // bgcolor: 'background.paper',
+                boxShadow: 24,
+                p: 4
+              }}>
+                <h2 id="modal-title">{blipLabel}</h2>
+                <p id="modal-description"> {blipDescription} </p>
+                <Box sx={{ alignSelf: 'end' }}>
+                  <Button onClick={handleCloseModal}>
+                    Close
+                  </Button>
+                  {blipLink ? (
+                    <a href={blipLink} target="_blank" rel="noopener noreferrer">
+                      <Button disabled={blipLink === ""}>
+                        Open
+                      </Button>
+                    </a>
+                  ) : (
+                    <Button disabled={blipLink === ""}>
+                      Open
+                    </Button>
+                  )}
+                </Box>
+              </Box>
+            </Modal>
           </div>
         </div>
 
         <InformationTable />
 
-      </Grid>
-    </div>
+      </Grid >
+    </div >
   );
 }
 

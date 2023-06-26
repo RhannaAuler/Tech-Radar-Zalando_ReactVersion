@@ -5,7 +5,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 
 const app = express();
-const port = 3001;
+const port = 3001; // server will be running on port 3001
 
 app.use(cors());
 
@@ -14,22 +14,15 @@ app.use(bodyParser.json());
 
 app.post('/update-json', (req, res) => {
   // read the JSON file
-  console.log('here')
   const filePath = path.resolve(__dirname, '../src/techData.json'); // in case directory name is different
   const jsonData = JSON.parse(fs.readFileSync(filePath, 'utf8'));
 
+  // receive the new tech data from the client
   const newTech = req.body;
 
-  console.log(newTech)
+  // console.log(newTech)
 
-  // modify the JSON object
-  // const newTech = {
-  //   "quadrant": 0,
-  //   "ring": 2,
-  //   "label": "Julia",
-  //   "active": true,
-  //   "moved": 0
-  // };
+  // add the new tech data to the entries object inside the json
   jsonData.entries.push(newTech);
 
   // write the modified JSON object back to the file

@@ -20,6 +20,12 @@
   html {
     background-color: #121212;
   }
+  .boxModal {
+    background-color: #121212;
+  }
+  .dialogBackground {
+    background-color: #121212;
+  }
 }
 
 /* Style when system in light mode */
@@ -36,6 +42,12 @@
     fill: #000000;
   }
   html {
+    background-color: #ffffff;
+  }
+  .boxModal {
+    background-color: #ffffff;
+  }
+  .dialogBackground {
     background-color: #ffffff;
   }
 }

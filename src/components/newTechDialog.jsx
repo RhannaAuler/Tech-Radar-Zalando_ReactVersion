@@ -4,9 +4,10 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import '../App.css'
 
 // dialog to add a new technology in the radar, adding it to the json file
-const NewTechDialog = ({ isOpen, onClose, onConfirm }) => {
+const NewTechDialog = ({ isOpen, onClose, onConfirm, className }) => {
 
     // variables that will be used to create the new blip
     const [type, setType] = useState('');

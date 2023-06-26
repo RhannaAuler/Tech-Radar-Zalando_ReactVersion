@@ -2,6 +2,7 @@ import React from 'react';
 import { makeStyles } from '@mui/styles';
 import { Grid, List, ListItem, Typography } from '@mui/material';
 
+// Style used to added bullet points to the list items
 const useStyles = makeStyles({
     listItem: {
         display: 'flex',
@@ -18,6 +19,8 @@ const useStyles = makeStyles({
     },
 });
 
+// Table of information which is displayed in the bottom part of the frontend
+// Original text by Zalando
 const InformationTable = () => {
     const classes = useStyles();
 
