@@ -1,33 +1,23 @@
 import React from 'react';
-import { makeStyles } from '@mui/styles';
+import { styled } from '@mui/system';
 import { Grid, List, ListItem, Typography } from '@mui/material';
 
-// Style used to added bullet points to the list items
-const useStyles = makeStyles({
-    listItem: {
-        display: 'flex',
-        alignItems: 'flex-start',
-        paddingTop: 0,
-        paddingBottom: 0,
-        margin: 0,
-    },
-    bullet: {
-        marginTop: 'auto',
-        marginRight: '0.5rem',
-        marginLeft: '-1rem',
-        fontSize: '1.2rem',
-    },
+const Bullet = styled('span')({
+    marginTop: 'auto',
+    marginRight: '0.5rem',
+    marginLeft: '-1rem',
+    fontSize: '1.2rem',
 });
+
 
 // Table of information which is displayed in the bottom part of the frontend
 // Original text by Zalando
 const InformationTable = () => {
-    const classes = useStyles();
 
     return (
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-            <Grid 
-                container 
+            <Grid
+                container
                 spacing={4}
                 direction="row"
                 width={1450}
@@ -43,33 +33,53 @@ const InformationTable = () => {
                         rings with the following semantics:
                     </Typography>
                     <List>
-                        <ListItem className={classes.listItem}>
+                        <ListItem
+                            sx={{
+                                paddingTop: 0,
+                                paddingBottom: 1,
+                                margin: 0,
+                            }} >
                             <Typography variant="body1" component="span">
-                                <span className={classes.bullet}>&bull;</span>
+                                <Bullet>•</Bullet>
                                 <strong>ADOPT</strong> — Technologies we have high confidence in to serve our purpose, also in large scale.
                                 Technologies with a usage culture in our Zalando production environment, low risk and recommended to be widely used.
                             </Typography>
                         </ListItem>
-                        <ListItem className={classes.listItem}>
+                        <ListItem
+                            sx={{
+                                paddingTop: 0,
+                                paddingBottom: 1,
+                                margin: 0,
+                            }} >
                             <Typography variant="body1" component="span">
-                                <span className={classes.bullet}>&bull;</span>
+                                <Bullet>•</Bullet>
                                 <strong>TRIAL</strong> — Technologies that we have seen work with success in project work to solve a real problem;
                                 first serious usage experience that confirm benefits and can uncover limitations. TRIAL technologies are slightly more
                                 risky; some engineers in our organization walked this path and will share knowledge and experiences.
                             </Typography>
                         </ListItem>
-                        <ListItem className={classes.listItem}>
+                        <ListItem
+                            sx={{
+                                paddingTop: 0,
+                                paddingBottom: 1,
+                                margin: 0,
+                            }} >
                             <Typography variant="body1" component="span">
-                                <span className={classes.bullet}>&bull;</span>
+                                <Bullet>•</Bullet>
                                 <strong>ASSESS</strong> — Technologies that are promising and have clear potential value-add for us; technologies worth
                                 to invest some research and prototyping efforts in to see if it has impact. ASSESS technologies have higher risks;
                                 they are often brand new and highly unproven in our organisation. You will find some engineers that have knowledge in
                                 the technology and promote it, you may even find teams that have started a prototyping effort.
                             </Typography>
                         </ListItem>
-                        <ListItem className={classes.listItem}>
+                        <ListItem
+                            sx={{
+                                paddingTop: 0,
+                                paddingBottom: 1,
+                                margin: 0,
+                            }} >
                             <Typography variant="body1" component="span">
-                                <span className={classes.bullet}>&bull;</span>
+                                <Bullet>•</Bullet>
                                 <strong>HOLD</strong> — Technologies not recommended to be used for new projects. Technologies that we think are not
                                 (yet) worth to (further) invest in. HOLD technologies should not be used for new projects, but usually can be continued
                                 for existing projects.
