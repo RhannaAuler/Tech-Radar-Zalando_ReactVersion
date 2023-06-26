@@ -9,8 +9,11 @@ import { Grid, Button, Modal, Box } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import NewTechDialog from './components/newTechDialog';
 
+// the main client component
+// further components are called from here
+
 function App() {
-  const svgRef = useRef();
+  const svgRef = useRef(); // use to get the svg current reference
 
   // get the page dimensions and change in the config object (currently not being used)
   const pageWidth = document.documentElement.clientWidth;
@@ -121,12 +124,13 @@ function App() {
         alignItems="center"
         padding={0}
       >
-
+        {/* PAGE TITLE */}
         <title>Zalando Tech Radar</title>
-
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '20px' }}>
           <div style={{ position: 'relative' }}>
+            {/* RADAR */}
             <svg id={'#radar'} ref={svgRef}></svg>
+            {/* BUTTON TO ADD NEW TECH */}
             <Button
               variant="contained"
               style={{
@@ -142,7 +146,9 @@ function App() {
             >
               Add Tech
             </Button>
+            {/* ADD NEW TECH DIALOG */}
             <NewTechDialog isOpen={isDialogOpen} onClose={handleDialogClose} onConfirm={handleDialogConfirm} />
+            {/* MODAL WITH TECH DESCRIPTION */}
             <Modal open={isModalOpen} onClose={handleCloseModal}>
               <Box className="boxModal" sx={{
                 display: 'flex',
@@ -179,9 +185,8 @@ function App() {
             </Modal>
           </div>
         </div>
-
+        {/* INFORMATION TABLE DISPLAYED AT THE BOTTOM */}
         <InformationTable />
-
       </Grid >
     </div >
   );

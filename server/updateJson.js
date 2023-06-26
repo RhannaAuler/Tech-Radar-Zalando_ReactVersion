@@ -12,6 +12,7 @@ app.use(cors());
 // configure body-parser to parse JSON bodies
 app.use(bodyParser.json());
 
+// post request to add a new technology in the json file
 app.post('/update-json', (req, res) => {
   // read the JSON file
   const filePath = path.resolve(__dirname, '../src/techData.json'); // in case directory name is different

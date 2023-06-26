@@ -1,5 +1,7 @@
-// this component data was generated with chatGPT to illustrate a possible use of the modal 
+// this component data is used to show a description of the technology once the blip is clicked in the radar
+// it was generated with chatGPT to illustrate a possible use of the modal 
 // additional relevant information could be displayed 
+
 
 const technologyDescriptions = {
   'AWS DynamoDB': 'A fully managed NoSQL database service provided by AWS. It offers fast and predictable performance with seamless scalability and automatic replication across multiple regions.',

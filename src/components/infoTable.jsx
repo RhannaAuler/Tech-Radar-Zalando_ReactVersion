@@ -32,6 +32,7 @@ const InformationTable = () => {
                         assessment result, called <em>ring assignment</em>. We use four
                         rings with the following semantics:
                     </Typography>
+                    {/* List of the semantics definitions */}
                     <List>
                         <ListItem
                             sx={{
@@ -87,6 +88,7 @@ const InformationTable = () => {
                         </ListItem>
                     </List>
                 </Grid>
+                {/* Second column */}
                 <Grid item xs={6}>
                     <Typography variant="h6" fontWeight="bold" style={{ textAlign: 'start' }} paragraph>What is the purpose?</Typography>
                     <Typography variant="body1" style={{ textAlign: 'start' }} paragraph>
@@ -122,7 +124,6 @@ const InformationTable = () => {
                         the Tech Radar at Zalando.
                     </Typography>
                     <Typography variant="body1" style={{ fontStyle: 'italic', textAlign: 'start' }}>
-                        {/* <em> used fontStyle instead */}
                         BTW, if you would like to create your own Tech Radar — we have{" "}
                         <a href="https://github.com/zalando/tech-radar">
                             open sourced the code

@@ -8,7 +8,9 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
 
-// dialog to add a new technology in the radar, adding it to the json file
+// This component is a dialog to add a new technology in the radar
+// The user can select the technology type, semantic, and label 
+// The confirm is only enabled when all the fields are filled
 const NewTechDialog = ({ isOpen, onClose, onConfirm, className }) => {
 
     // variables that will be used to create the new blip
@@ -17,11 +19,10 @@ const NewTechDialog = ({ isOpen, onClose, onConfirm, className }) => {
     const [label, setLabel] = useState('');
     const [isFormValid, setIsFormValid] = useState(false);
 
-    // functions to set the new values defined in the dialog
+    // handle functions to set the new values defined in the dialog
     const handleTypeChange = (event) => {
-        // e.g. value 0 - Languages --> quadrant 0
-        setType(event.target.value);
-        validateForm();
+        setType(event.target.value); // e.g. value 0 - Languages --> quadrant 0
+        validateForm(); // to check if the confirm button can be
     };
 
     const handleSemanticsChange = (event) => {
@@ -51,12 +52,13 @@ const NewTechDialog = ({ isOpen, onClose, onConfirm, className }) => {
 
     return (
         <Dialog open={isOpen} onClose={onClose} className="newTechDialog">
-            <DialogTitle>
-                <h3 style={{ marginBottom: '1px', marginTop: "2px", marginLeft: "8px"}}>Add a new Tech Radar</h3>
+            <DialogTitle sx={{ marginBottom: '0px', marginTop: "2px", marginLeft: "8px", fontWeight:"bold"}}>
+                Add a new Tech Radar
             </DialogTitle>
             <DialogContent>
                 <Box sx={{ display: 'flex', flexDirection: 'column', mx:1, mb: 0 }}>
                     <DialogContentText sx={{ mb: 2 }}>Select the new technology characteristics</DialogContentText>
+                    {/* TYPE TECH DROP DOWN MENU */}
                     <FormControl size="small" sx={{ mb: 2 }}>
                         <InputLabel id="select-type-label">Type</InputLabel>
                         <Select
@@ -72,6 +74,7 @@ const NewTechDialog = ({ isOpen, onClose, onConfirm, className }) => {
                             <MenuItem value={3}>Data Management</MenuItem>
                         </Select>
                     </FormControl>
+                    {/* SEMANTICS DROP DOWN MENU */}
                     <FormControl size="small" sx={{ mb: 2 }}>
                         <InputLabel id="select-semantics-label">Semantics</InputLabel>
                         <Select
@@ -87,6 +90,7 @@ const NewTechDialog = ({ isOpen, onClose, onConfirm, className }) => {
                             <MenuItem value={3}>HOLD</MenuItem>
                         </Select>
                     </FormControl>
+                    {/* LABEL FIELD */}
                     <TextField
                         label="Tech Label"
                         variant="outlined"
@@ -98,6 +102,7 @@ const NewTechDialog = ({ isOpen, onClose, onConfirm, className }) => {
                     />
                 </Box>
             </DialogContent>
+            {/* CANCEL AND CONFIRM BUTTONS */}
             <DialogActions>
                 <Button disabled={!isFormValid} onClick={() => onConfirm(type, semantics, label)}>Confirm</Button>
                 <Button onClick={onClose}>Cancel</Button>

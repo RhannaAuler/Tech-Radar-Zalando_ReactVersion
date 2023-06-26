@@ -20,9 +20,14 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+// original radar visualization function adapted to work with the current project
+// the function is called to add all the necessary information and attributes to the radar SVG
+
 import * as d3 from 'd3';
 
-function radar_visualization(svg, svgRef, config, handleOpenModal) {
+function radar_visualization(svg, svgRef, config, handleOpenModal) { 
+  // config contains all the blips data
+  // handleOpenModal is a function passed as parameter to open the modal box once the blip is clicked
 
     const svgElement = svgRef.current;
 
@@ -430,10 +435,10 @@ function radar_visualization(svg, svgRef, config, handleOpenModal) {
       var blip = d3.select(this);
 
       // blip link
-      // if (d.active && Object.prototype.hasOwnProperty.call(d, "link") && d.link) {
       if (d.active) {
         blip = blip.append("a")
-          // .attr("xlink:href", d.link ? d.link : " ")
+          // .attr("xlink:href", d.link ? d.link : " ") 
+          // this part was modified to open the modal instead of directly going to the website link
           .style("cursor", "pointer")
           .on("click", function (d, i) {
             // Handle click event to open modal
