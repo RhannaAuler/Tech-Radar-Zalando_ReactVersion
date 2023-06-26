@@ -25,7 +25,7 @@ const InformationTable = () => {
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
             <Grid 
                 container 
-                spacing={2}
+                spacing={4}
                 direction="row"
                 width={1450}
                 display="flex"

@@ -58,7 +58,7 @@ function radar_visualization(svg, svgRef, config) {
     ];
 
     const title_offset =
-      { x: -675, y: -460 };
+      { x: -675, y: -420 };
 
     const footer_offset =
       { x: -675, y: 420 };
@@ -432,7 +432,11 @@ function radar_visualization(svg, svgRef, config) {
       // blip link
       if (d.active && Object.prototype.hasOwnProperty.call(d, "link") && d.link) {
         blip = blip.append("a")
-          .attr("xlink:href", d.link);
+          .attr("xlink:href", d.link)
+          .on("click", function (d, i) {
+            // Handle click event to open modal
+            console.log(blip._groups[0][0].__data__);
+          });
 
         if (config.links_in_new_tabs) {
           blip.attr("target", "_blank");

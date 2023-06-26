@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import radar_visualization from './radar';
 import * as d3 from 'd3';
 import techData from './techData.json';
-import InformationTable from './infoTable';
+import InformationTable from './components/infoTable';
 import { Grid, Button } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import NewTechDialog from './components/newTechDialog';
@@ -88,7 +88,7 @@ function App() {
 
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+    <div id={'#main'} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
       <Grid className="App"
         container
         direction="column"
@@ -100,11 +100,6 @@ function App() {
       >
 
         <title>Zalando Tech Radar</title>
-        {/* <link rel="shortcut icon" href="https://www.zalando.de/favicon.ico"> */}
-
-        {/* <script src="https://d3js.org/d3.v4.min.js"></script>
-        <script src="radar.js"></script> */}
-
 
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '20px' }}>
           <div style={{ position: 'relative' }}>
@@ -127,7 +122,6 @@ function App() {
             <NewTechDialog isOpen={isDialogOpen} onClose={handleDialogClose} onConfirm={handleDialogConfirm} />
           </div>
         </div>
-
 
         <InformationTable />
 

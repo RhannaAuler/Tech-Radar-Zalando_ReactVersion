@@ -17,6 +17,9 @@
   text {
     fill: #fffffff7;
   }
+  html {
+    background-color: #121212;
+  }
 }
 
 /* Style when system in light mode */
@@ -31,6 +34,9 @@
   }
   text {
     fill: #000000;
+  }
+  html {
+    background-color: #ffffff;
   }
 }
 
