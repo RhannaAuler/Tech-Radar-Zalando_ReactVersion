@@ -104,8 +104,8 @@ const NewTechDialog = ({ isOpen, onClose, onConfirm, className }) => {
             </DialogContent>
             {/* CANCEL AND CONFIRM BUTTONS */}
             <DialogActions>
-                <Button disabled={!isFormValid} onClick={() => onConfirm(type, semantics, label)}>Confirm</Button>
                 <Button onClick={onClose}>Cancel</Button>
+                <Button disabled={!isFormValid} onClick={() => onConfirm(type, semantics, label)}>Confirm</Button>
             </DialogActions>
         </Dialog>
     );

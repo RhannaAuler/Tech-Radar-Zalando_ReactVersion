@@ -172,12 +172,12 @@ function App() {
                   {blipLink ? (
                     <a href={blipLink} target="_blank" rel="noopener noreferrer">
                       <Button disabled={blipLink === ""}>
-                        Open
+                        Learn more
                       </Button>
                     </a>
                   ) : (
                     <Button disabled={blipLink === ""}>
-                      Open
+                      Learn more
                     </Button>
                   )}
                 </Box>
