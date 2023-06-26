@@ -1,10 +1,12 @@
+import './newTechDialog.css'
 import React, { useState, useEffect } from 'react';
-import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Button, Box, TextField } from '@material-ui/core';
+import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Button, Box, TextField } from '@mui/material';
+import { Typography } from '@mui/material';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import '../App.css'
+
 
 // dialog to add a new technology in the radar, adding it to the json file
 const NewTechDialog = ({ isOpen, onClose, onConfirm, className }) => {
@@ -35,24 +37,26 @@ const NewTechDialog = ({ isOpen, onClose, onConfirm, className }) => {
     // function to enable confirm button only if fields were selected
     const validateForm = () => {
         setIsFormValid(type !== '' && semantics !== '' && label !== '');
-      };
+    };
 
     // reset the variables everytime the dialog is open
-      useEffect(() => {
+    useEffect(() => {
         if (isOpen) {
-          setType('');
-          setSemantics('');
-          setLabel('');
-          setIsFormValid(false);
+            setType('');
+            setSemantics('');
+            setLabel('');
+            setIsFormValid(false);
         }
-      }, [isOpen]);
+    }, [isOpen]);
 
     return (
-        <Dialog open={isOpen} onClose={onClose}>
-            <DialogTitle>Add new Technology to the Radar</DialogTitle>
+        <Dialog open={isOpen} onClose={onClose} className="newTechDialog">
+            <DialogTitle>
+                <h3 style={{ marginBottom: '1px', marginTop: "2px", marginLeft: "8px"}}>Add a new Tech Radar</h3>
+            </DialogTitle>
             <DialogContent>
-                <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-                    <DialogContentText sx={{ mb: 2 }}>Select the new tech characteristics</DialogContentText>
+                <Box sx={{ display: 'flex', flexDirection: 'column', mx:1, mb: 0 }}>
+                    <DialogContentText sx={{ mb: 2 }}>Select the new technology characteristics</DialogContentText>
                     <FormControl size="small" sx={{ mb: 2 }}>
                         <InputLabel id="select-type-label">Type</InputLabel>
                         <Select

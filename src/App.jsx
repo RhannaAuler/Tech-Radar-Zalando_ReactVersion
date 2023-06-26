@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import radar_visualization from './radar';
 import * as d3 from 'd3';
 import techData from './techData.json';
-import techDescription from './components/techDescriptions';
+import techDescription from './components/techDescription';
 import InformationTable from './components/infoTable';
 import { Grid, Button, Modal, Box } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
@@ -28,13 +28,13 @@ function App() {
   const [blipLink, setBlipLink] = useState("");
   const [blipDescription, setBlipDescription] = useState("");
 
+  // function call when the blip is clicked
+  // it set the necessary variables to be shown in the modal
   const handleOpenModal = (label, link) => {
-    console.log("openModal", label, link, link !== undefined, link !== null, techDescription[label]);
     setBlipLabel(label);
     if (link !== undefined) setBlipLink(link);
-    let textTech = techDescription[label];
+    let textTech = techDescription[label]; // description is available in the techDescription component
     if (textTech) setBlipDescription(textTech);
-    console.log(blipLink === "")
     setIsModalOpen(true);
   };
 
@@ -157,7 +157,7 @@ function App() {
                 boxShadow: 24,
                 p: 4
               }}>
-                <h2 id="modal-title">{blipLabel}</h2>
+                <h2 id="modal-title" style={{ marginBottom: '1px' }}>{blipLabel}</h2>
                 <p id="modal-description"> {blipDescription} </p>
                 <Box sx={{ alignSelf: 'end' }}>
                   <Button onClick={handleCloseModal}>

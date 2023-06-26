@@ -10,21 +10,31 @@
     background-color: #121212;
     color: #fffffff7;
   }
+
   #radar {
     background-color: #121212;
     color: #fffffff7;
   }
+
   text {
     fill: #fffffff7;
   }
+
   html {
     background-color: #121212;
   }
+
   .boxModal {
-    background-color: #121212;
+    background-color: #353434;
+    color: #ffffffd9;
   }
-  .dialogBackground {
-    background-color: #121212;
+
+  .boxModal .MuiButtonBase-root.Mui-disabled {
+    color: #c5bdbd8e;
+  }
+
+  .boxModal .MuiButtonBase-root {
+    color: rgb(0, 158, 176);
   }
 }
 
@@ -34,19 +44,24 @@
     background-color: #ffffff;
     color: #000000;
   }
+
   #radar {
     background-color: #ffffff;
     color: #000000;
   }
+
   text {
     fill: #000000;
   }
+
   html {
     background-color: #ffffff;
   }
+
   .boxModal {
     background-color: #ffffff;
   }
+
   .dialogBackground {
     background-color: #ffffff;
   }
@@ -55,13 +70,16 @@
 h3 {
   margin-top: 50px;
 }
+
 li {
   margin: 25px 50px 0 0;
 }
+
 table {
   width: 90%;
   margin: 0 50px 0 50px;
 }
+
 td {
   width: 50%;
   vertical-align: top;
